@@ -1,7 +1,5 @@
 package com.ranjanpandey.propertymanagerment.service.impl;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
-import com.ranjanpandey.propertymanagerment.controller.PropertyController;
 import com.ranjanpandey.propertymanagerment.converter.PropertyConverter;
 import com.ranjanpandey.propertymanagerment.dto.PropertyDTO;
 import com.ranjanpandey.propertymanagerment.entity.PropertyEntity;
@@ -32,22 +30,22 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public List<PropertyDTO> getAllProperties(){
-       List<PropertyEntity> listOfProperties = (List<PropertyEntity>) propertyRepository.findAll();
-       List<PropertyDTO> propList = new ArrayList<>();
+    public List<PropertyDTO> getAllProperties() {
+        List<PropertyEntity> listOfProperties = (List<PropertyEntity>) propertyRepository.findAll();
+        List<PropertyDTO> propList = new ArrayList<>();
 
-        for(PropertyEntity pe: listOfProperties){
+        for (PropertyEntity pe : listOfProperties) {
             PropertyDTO dto = propertyConverter.convertEntityToDTo(pe);
             propList.add(dto);
         }
-        return  propList;
+        return propList;
     }
 
     @Override
     public PropertyDTO updateProperty(PropertyDTO propertyDTO, Long propertyId) {
         PropertyDTO pDTO = null;
         Optional<PropertyEntity> optionalPropertyEntity = propertyRepository.findById(propertyId);
-        if(optionalPropertyEntity.isPresent()){
+        if (optionalPropertyEntity.isPresent()) {
             //Record from database
             PropertyEntity propertyEntity = optionalPropertyEntity.get();
             //Change field from controller
@@ -59,17 +57,17 @@ public class PropertyServiceImpl implements PropertyService {
 
             pDTO = propertyConverter.convertEntityToDTo(propertyEntity);
             //Save record to the database
-            propertyEntity =  propertyRepository.save(propertyEntity);
+            propertyEntity = propertyRepository.save(propertyEntity);
 
         }
-        return  pDTO;
+        return pDTO;
     }
 
     @Override
     public PropertyDTO updatePropertyDescription(PropertyDTO propertyDTO, Long propertyId) {
         PropertyDTO dto = null;
-        Optional<PropertyEntity>  optionalPropertyEntity = propertyRepository.findById(propertyId);
-        if(optionalPropertyEntity.isPresent()){
+        Optional<PropertyEntity> optionalPropertyEntity = propertyRepository.findById(propertyId);
+        if (optionalPropertyEntity.isPresent()) {
             PropertyEntity pe = optionalPropertyEntity.get();
             pe.setDescription(propertyDTO.getDescription());
             dto = propertyConverter.convertEntityToDTo(pe);
@@ -81,14 +79,14 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public PropertyDTO updatePropertyPrice(PropertyDTO propertyDTO, Long propertyId) {
         PropertyDTO dto = null;
-      Optional<PropertyEntity>   optionalPropertyEntity = propertyRepository.findById(propertyId);
-       if(optionalPropertyEntity.isPresent()){
-           PropertyEntity propertyEntity = optionalPropertyEntity.get();
-           propertyEntity.setPrice(propertyDTO.getPrice());
-           dto = propertyConverter.convertEntityToDTo(propertyEntity);
-           propertyRepository.save(propertyEntity);
-       }
-       return dto;
+        Optional<PropertyEntity> optionalPropertyEntity = propertyRepository.findById(propertyId);
+        if (optionalPropertyEntity.isPresent()) {
+            PropertyEntity propertyEntity = optionalPropertyEntity.get();
+            propertyEntity.setPrice(propertyDTO.getPrice());
+            dto = propertyConverter.convertEntityToDTo(propertyEntity);
+            propertyRepository.save(propertyEntity);
+        }
+        return dto;
     }
 
     @Override
