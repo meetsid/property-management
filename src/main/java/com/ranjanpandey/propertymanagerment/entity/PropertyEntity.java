@@ -1,23 +1,21 @@
 package com.ranjanpandey.propertymanagerment.entity;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "PROPERTY_TABLE")
 public class PropertyEntity {
-       @Id
-       @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long Id;
-       @Column(name = "PROPERTY_TITLE",nullable = false)
-        private String title;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long Id;
+    @Column(name = "PROPERTY_TITLE", nullable = false)
+    private String title;
 
-        private String description;
-        private String ownerName;
-        private String ownerEmail;
-        private Double price;
+    private String description;
+
+    private Double price;
 
     public Long getId() {
         return Id;
@@ -41,22 +39,6 @@ public class PropertyEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
-
-    public String getOwnerEmail() {
-        return ownerEmail;
-    }
-
-    public void setOwnerEmail(String ownerEmail) {
-        this.ownerEmail = ownerEmail;
     }
 
     public Double getPrice() {

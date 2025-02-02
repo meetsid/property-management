@@ -1,13 +1,18 @@
 package com.ranjanpandey.propertymanagerment.dto;
+
 public class PropertyDTO {
-
-
     private Long id;
     private String title;
     private String description;
-    private String ownerName;
-    private String ownerEmail;
     private Double price;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -25,22 +30,6 @@ public class PropertyDTO {
         this.description = description;
     }
 
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
-
-    public String getOwnerEmail() {
-        return ownerEmail;
-    }
-
-    public void setOwnerEmail(String ownerEmail) {
-        this.ownerEmail = ownerEmail;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -48,13 +37,4 @@ public class PropertyDTO {
     public void setPrice(Double price) {
         this.price = price;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }
