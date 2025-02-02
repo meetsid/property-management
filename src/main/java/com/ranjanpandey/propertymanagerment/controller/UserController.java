@@ -1,32 +1,41 @@
 package com.ranjanpandey.propertymanagerment.controller;
 
-import com.ranjanpandey.propertymanagerment.dto.PropertyDTO;
 import com.ranjanpandey.propertymanagerment.dto.UserDTO;
-import com.ranjanpandey.propertymanagerment.repository.UserRepository;
 import com.ranjanpandey.propertymanagerment.service.UserService;
-import com.ranjanpandey.propertymanagerment.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
-
-    @Autowired
     UserService userService;
-
+    @Autowired
+    public UserController( UserService userService){
+    this.userService = userService;
+    }
+    /**
+     * http://localhost:8080/api/v1/user/register
+     {
+     "password" : "admin",
+     "ownerName" : "admin",
+     "ownerEmail" : "admin@gmail.com",
+     "ownerPhone" : "9999999999"
+     }
+     */
     @PostMapping("/register")
     public ResponseEntity<UserDTO>  register(@RequestBody UserDTO userDTO){
         userDTO =  userService.register(userDTO);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
+
         //ResponseEntity<PropertyDTO> responseEntity = new ResponseEntity<>(userDTO, HttpStatus.OK);
         //return responseEntity;
-
-        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDTO){
+        userDTO = userService.login(userDTO.getOwnerEmail(),userDTO.getPassword());
+        return  new ResponseEntity<>(userDTO,HttpStatus.OK);
+    }
 }
